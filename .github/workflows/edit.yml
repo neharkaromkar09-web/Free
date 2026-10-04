@@ -1,0 +1,32 @@
+name: Auto Video Editor
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install FFmpeg & Packages
+      run: |
+        sudo apt update
+        sudo apt install -y ffmpeg
+        pip install openai-whisper moviepy
+
+    - name: Run Video Editor
+      run: python script.py
+
+    - name: Upload Edited Video
+      uses: actions/upload-artifact@v3
+      with:
+        name: edited-gameplay
+        path: output_video.mp4
