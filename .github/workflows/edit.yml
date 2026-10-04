@@ -20,7 +20,8 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y ffmpeg
-        pip install openai-whisper "moviepy<2.0"
+        pip install openai-whisper "moviepy<2.0" "Pillow<10.0.0"
+
 
 
     - name: Run Video Editor
